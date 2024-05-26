@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/css/index.css">
+
+
+    <title>Tic Tac Toe</title>
+  </head>
+  <body>
+    <div>
+      <div class="board">
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+        <div class="cell"></div>
+      </div>
+      <button class="restart-button" disabled>Restart</button>
+      <div class="win-counts">
+        <span class="player-x">Player X: 0</span>
+        <span class="player-o">Player O: 0</span>
+      </div>
+      </div>
+    <!-- Optional JavaScript -->
+    <script src="assets/js/script.js"></script>
+    <script>
+        const cells = document.querySelectorAll('.cell');
+        const resetButton = document.querySelector('.restart-button');
+        const playerXCount = document.querySelector('.player-x');
+        const playerOCount = document.querySelector('.player-o');
+        let currentPlayer = 'X';
+        let playerXWins = 0;
+        let playerOWins = 0;
+        cells.forEach(cell => {
+          cell.addEventListener('click', () => {
+            if (cell.textContent === '') {
+              cell.textContent = currentPlayer;
+              if (checkForWinner()) {
+                alert(`${currentPlayer} wins!`);
+                updateWinCount();
+                resetGame();
+              } else if (checkForDraw()) {
+                alert('The match is a draw!');
+                resetGame();
+              } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+              }
+            }
+          });
+        });
+        resetButton.addEventListener('click', resetGame);
+        function checkForWinner() {
+          const winningCombinations = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+            [0, 4, 8], [2, 4, 6]             
+          ];
+          return winningCombinations.some(combination => {
+            const [a, b, c] = combination;
+            return cells[a].textContent === currentPlayer &&
+                  cells[b].textContent === currentPlayer &&
+                  cells[c].textContent === currentPlayer;
+          });
+        }
+        function checkForDraw() {
+          return Array.from(cells).every(cell => cell.textContent !== '');
+        }
+        function updateWinCount() {
+          if (currentPlayer === 'X') {
+            playerXWins++;
+            playerXCount.textContent = `Player X: ${playerXWins}`;
+          } else {
+            playerOWins++;
+            playerOCount.textContent = `Player O: ${playerOWins}`;
+          }
+        }
+        function resetGame() {
+          cells.forEach(cell => {
+            cell.textContent = '';
+          });
+          currentPlayer = 'X';
+        }
+    </script>
+  </body>
+</html>

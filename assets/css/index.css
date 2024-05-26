@@ -1,0 +1,58 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: cursive;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+body div .board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+body div .board .cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+body div .board .cell:hover {
+  background-color: #e6e6e6;
+}
+body div .board .cell.selected {
+  background-color: #ffa07a;
+}
+body div .restart-button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #ccc;
+  border-radius: 15px;
+  color: #000;
+  border: none;
+  cursor: pointer;
+}
+body div .win-counts {
+  margin: 40px auto;
+  text-align: center;
+}
+body div .win-counts span {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 40px 10px;
+  font-size: 20px;
+  padding: 10px 20px;
+}/*# sourceMappingURL=index.css.map */
